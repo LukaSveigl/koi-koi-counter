@@ -21,4 +21,6 @@ export class YakuValuesEditor {
       [yakuId]: value,
     });
   }
+
+  protected readonly Math = Math;
 }

@@ -8,6 +8,7 @@ import { YAKUS } from '../../../data/yakus';
 
 import { RulesetOptions } from '../ruleset-options/ruleset-options';
 import { YakuValuesEditor } from '../yaku-values-editor/yaku-values-editor';
+import {Ruleset} from "../../../core/models/ruleset.model";
 
 @Component({
   selector: 'app-setup-page',
@@ -43,7 +44,12 @@ export class SetupPage {
   readonly yakus = YAKUS;
 
   readonly validSetup = computed(() => {
-    return this.playerNames().every((name) => name.trim().length > 0);
+    const playerNamesValid = this.playerNames().every((name) => name.trim().length > 0);
+    const yakuValuesValid = Object.values(this.customYakuValues()).every(
+      (value) => Number.isInteger(value) && value > 0
+    );
+
+    return playerNamesValid && yakuValuesValid;
   });
 
   constructor() {
@@ -57,7 +63,7 @@ export class SetupPage {
       score: 0,
     }));
 
-    const ruleset = {
+    const ruleset: Ruleset = {
       rounds: this.rounds(),
       koiKoiBonus: this.koiKoiBonus(),
       flowerViewingSake: this.flowerViewingSake(),
@@ -91,12 +97,5 @@ export class SetupPage {
     this.customYakuValues.set({
       ...preset.values,
     });
-  }
-
-  updateYakuValue(yakuId: string, value: number) {
-    this.customYakuValues.update((values) => ({
-      ...values,
-      [yakuId]: value,
-    }));
   }
 }
