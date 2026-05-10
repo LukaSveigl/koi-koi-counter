@@ -1,0 +1,130 @@
+<h1>Koi-Koi Counter</h1>
+
+<section class="setup-section">
+    <h2>Players</h2>
+
+    @for (player of playerNames(); track $index) {
+        <input
+            [value]="player"
+            (input)="updatePlayerName($any($event.target).value, $index)"
+            placeholder="Player {{ $index + 1 }}"
+        />
+    }
+</section>
+
+<section class="setup-section">
+    <h2>Rounds</h2>
+
+    <label>
+        <input
+            type="radio"
+            [checked]="rounds() === 6"
+            (change)="rounds.set(6)"
+        />
+        6 Rounds
+    </label>
+
+    <label>
+        <input
+            type="radio"
+            [checked]="rounds() === 12"
+            (change)="rounds.set(12)"
+        />
+        12 Rounds
+    </label>
+</section>
+
+<section class="setup-section">
+    <h2>Rules</h2>
+
+    <label>
+        <input
+            type="checkbox"
+            [checked]="koiKoiBonus()"
+            (change)="koiKoiBonus.set($any($event.target).checked)"
+        />
+        Koi-Koi Bonus
+    </label>
+
+    <label>
+        <input
+            type="checkbox"
+            [checked]="flowerViewingSake()"
+            (change)="flowerViewingSake.set($any($event.target).checked)"
+        />
+        Flower Viewing Sake
+    </label>
+
+    <label>
+        <input
+            type="checkbox"
+            [checked]="moonViewingSake()"
+            (change)="moonViewingSake.set($any($event.target).checked)"
+        />
+        Moon Viewing Sake
+    </label>
+
+    <label>
+        <input
+            type="checkbox"
+            [checked]="sevenPointCap()"
+            (change)="sevenPointCap.set($any($event.target).checked)"
+        />
+        Seven Point Cap
+    </label>
+</section>
+
+<section class="setup-section">
+    <h2>Starting Oya</h2>
+
+    <select
+        [value]="oyaIndex()"
+        (change)="oyaIndex.set($any($event.target).value)"
+    >
+        @for (player of playerNames(); track $index) {
+            <option [value]="$index">
+                {{ player || 'Player ' + ($index + 1) }}
+            </option>
+        }
+    </select>
+</section>
+
+<section class="setup-section">
+    <h2>Score Preset</h2>
+
+    <select
+        [value]="selectedPresetId()"
+        (change)="selectPreset($any($event.target).value)"
+    >
+        @for (preset of presets; track preset.id) {
+            <option [value]="preset.id">
+                {{ preset.name }}
+            </option>
+        }
+    </select>
+</section>
+
+<section class="setup-section">
+    <h2>Custom Yaku Values</h2>
+
+    @for (yaku of yakus; track yaku.id) {
+        <label>
+            {{ yaku.name }}
+
+            <input
+                type="number"
+                [value]="customYakuValues()[yaku.id]"
+                (input)="updateYakuValue(
+                    yaku.id,
+                    +$any($event.target).value
+                )"
+            />
+        </label>
+    }
+
+<button
+    [disabled]="!validSetup()"
+    (click)="startGame()"
+>
+    Start Game
+</button>
