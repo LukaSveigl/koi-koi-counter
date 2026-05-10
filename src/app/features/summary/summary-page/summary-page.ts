@@ -1,4 +1,4 @@
-import { Component, computed, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { GameStore } from '../../../core/store/game.store';
 import { Router } from '@angular/router';
 

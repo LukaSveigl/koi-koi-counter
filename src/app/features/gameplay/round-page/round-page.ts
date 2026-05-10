@@ -47,6 +47,16 @@ export class RoundPage {
     return this.koiKoiCount() >= 0;
   });
 
+  constructor() {
+    if (this.ruleset()?.flowerViewingSake === false) {
+      this.yakus = this.yakus.filter((yaku) => yaku.id !== 'flower-viewing-sake');
+    }
+
+    if (this.ruleset()?.moonViewingSake === false) {
+      this.yakus = this.yakus.filter((yaku) => yaku.id !== 'moon-viewing-sake');
+    }
+  }
+
   applyRound() {
     if (this.gameStore.phase() !== GamePhase.Round) {
       void this.router.navigate(['/summary']);
