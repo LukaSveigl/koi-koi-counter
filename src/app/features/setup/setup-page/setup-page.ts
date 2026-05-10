@@ -8,7 +8,7 @@ import { YAKUS } from '../../../data/yakus';
 
 import { RulesetOptions } from '../ruleset-options/ruleset-options';
 import { YakuValuesEditor } from '../yaku-values-editor/yaku-values-editor';
-import {Ruleset} from "../../../core/models/ruleset.model";
+import { Ruleset } from '../../../core/models/ruleset.model';
 
 @Component({
   selector: 'app-setup-page',
