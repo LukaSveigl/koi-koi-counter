@@ -6,12 +6,12 @@ export const SCORE_PRESETS: ScorePreset[] = [
     name: 'Standard',
 
     values: {
-      plants: 1,
+      'plants': 1,
       'monthly-card': 6,
-      ribbons: 1,
+      'ribbons': 1,
       'poetry-ribbons': 6,
       'blue-ribbons': 6,
-      animals: 1,
+      'animals': 1,
       'boar-deer-butterfly': 6,
       'three-brights': 6,
       'four-brights': 10,
@@ -27,12 +27,12 @@ export const SCORE_PRESETS: ScorePreset[] = [
 
     // TODO: Change values
     values: {
-      plants: 1,
+      'plants': 1,
       'monthly-card': 6,
-      ribbons: 1,
+      'ribbons': 1,
       'poetry-ribbons': 6,
       'blue-ribbons': 6,
-      animals: 1,
+      'animals': 1,
       'boar-deer-butterfly': 6,
       'three-brights': 6,
       'four-brights': 10,
