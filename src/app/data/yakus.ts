@@ -15,7 +15,7 @@ export const YAKUS: Yaku[] = [
     },
     {
         id: 'poetry-ribbons',
-        name: 'Poetry-ribbons',
+        name: 'Poetry Ribbons',
     },
     {
         id: 'blue-ribbons',
@@ -27,7 +27,7 @@ export const YAKUS: Yaku[] = [
     },
     {
         id: 'boar-deer-butterfly',
-        name: 'Boar deer Butterfly',
+        name: 'Boar Deer Butterfly',
     },
     {
         id: 'three-brights',

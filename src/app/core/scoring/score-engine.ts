@@ -1,5 +1,5 @@
-import { Yaku } from "../models/yaku.model";
-import { Ruleset } from "../models/ruleset.model";
+import {Yaku} from "../models/yaku.model";
+import {Ruleset} from "../models/ruleset.model";
 
 export function calculateRoundScore(
     yakus: Yaku[],

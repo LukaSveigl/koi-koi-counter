@@ -1,4 +1,4 @@
-import { ScorePreset } from "../core/models/score-preset.model";
+import {ScorePreset} from "../core/models/score-preset.model";
 
 export const SCORE_PRESETS: ScorePreset[] = [
     {

@@ -2,7 +2,7 @@ import { Yaku } from "./yaku.model";
 
 export interface RoundResult {
     roundNumber: number;
-    winnderId: string;
+    winnerId: string;
     yakus: Yaku[];
     koiKoiCount: number;
     stopped: boolean;

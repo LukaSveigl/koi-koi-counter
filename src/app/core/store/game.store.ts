@@ -1,9 +1,9 @@
-import { Injectable, computed, signal } from '@angular/core';
+import {Injectable, computed, signal} from '@angular/core';
 
-import { Player } from '../models/player.model';
-import { Ruleset } from "../models/ruleset.model";
-import { RoundResult } from "../models/round-result.model";
-import { GamePhase } from "../models/game-phase.enum";
+import {Player} from '../models/player.model';
+import {Ruleset} from "../models/ruleset.model";
+import {RoundResult} from "../models/round-result.model";
+import {GamePhase} from "../models/game-phase.enum";
 
 @Injectable({
     providedIn: 'root'
@@ -50,7 +50,7 @@ export class GameStore {
 
         this.players.update(players =>
             players.map(player => {
-                if (player.id !== result.winnderId) {
+                if (player.id !== result.winnerId) {
                     return player;
                 }
 

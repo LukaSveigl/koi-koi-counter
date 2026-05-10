@@ -1,0 +1,93 @@
+<h1>Koi-Koi Counter - Round</h1>
+
+<h2>Round {{ currentRound() }}</h2>
+
+<section class="round-section">
+    <h2>Winner Select</h2>
+
+    <label>
+        <input
+            type="radio"
+            [checked]="winnerId() === players()[0].id"
+            (change)="winnerId.set(players()[0].id)"
+        />
+        {{ players()[0].name }}
+    </label>
+
+    <label>
+        <input
+            type="radio"
+            [checked]="winnerId() === players()[1].id"
+            (change)="winnerId.set(players()[1].id)"
+        />
+        {{ players()[1].name }}
+    </label>
+</section>
+
+<section class="round-section">
+    <h2>Yakus</h2>
+
+    @for (yaku of yakus; track yaku.id) {
+        <label>
+            <input
+                type="button"
+                (click)="selectYaku(yaku.id)"
+                value="{{ yaku.name }}"
+            />
+        </label>
+    }
+
+    <div class="selected-yakus">
+        @for (yaku of selectedYakus(); track yaku.id) {
+            <input
+                type="button"
+                (click)="deselectYaku(yaku.id)"
+                value="{{ yaku.name }}"
+            />
+        }
+    </div>
+</section>
+
+<section class="round-section">
+    <h2>Koi-Koi value</h2>
+
+    <input
+        type="number"
+        [value]="koiKoiCount()"
+        (input)="koiKoiCount.set(Math.abs($any($event.target).valueAsNumber))"
+        min="0"
+        step="1"
+    />
+</section>
+
+<section class="round-section">
+    <h2>Round Value</h2>
+
+    {{ roundValue() }}
+</section>
+
+<section class="round-section">
+    <h2>Round Actions</h2>
+
+    <button
+        (click)="applyRound()"
+        [disabled]="!validRound()"
+    >Submit round</button>
+
+    <button
+        (click)="resetRound()"
+
+    >Reset round</button>
+</section>
+
+<section class="round-section">
+    <h2>Player Scores</h2>
+
+    <p>
+        {{ players()[0].name }}: {{ players()[0].score }}
+    </p>
+
+    <p>
+        {{ players()[1].name }}: {{ players()[1].score }}
+    </p>
+</section>

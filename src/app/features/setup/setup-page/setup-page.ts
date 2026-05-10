@@ -1,111 +1,112 @@
-import { Component, computed, signal } from "@angular/core";
-import { Router } from "@angular/router";
+import {Component, inject, computed, signal} from "@angular/core";
+import {Router} from "@angular/router";
 
-import { GameStore } from "../../../core/store/game.store";
+import {GameStore} from "../../../core/store/game.store";
 
-import { SCORE_PRESETS } from "../../../data/score-presets";
-import { YAKUS } from "../../../data/yakus";
+import {SCORE_PRESETS} from "../../../data/score-presets";
+import {YAKUS} from "../../../data/yakus";
 
 @Component({
-  selector: "app-setup-page",
-  imports: [],
-  templateUrl: "./setup-page.html",
-  styleUrl: "./setup-page.scss",
+    selector: "app-setup-page",
+    imports: [],
+    templateUrl: "./setup-page.html",
+    styleUrl: "./setup-page.scss",
 })
 export class SetupPage {
-  readonly playerNames = signal([
-      '',
-      ''
-  ])
+    private readonly gameStore= inject(GameStore);
 
-  readonly rounds = signal<6 | 12>(12);
+    private readonly router = inject(Router);
 
-  readonly koiKoiBonus = signal(true);
+    readonly playerNames = signal([
+        '',
+        ''
+    ])
 
-  readonly flowerViewingSake = signal(true);
+    readonly rounds = signal<6 | 12>(12);
 
-  readonly moonViewingSake = signal(true);
+    readonly koiKoiBonus = signal(true);
 
-  readonly sevenPointCap = signal(false);
+    readonly flowerViewingSake = signal(true);
 
-  readonly oyaIndex = signal(0);
+    readonly moonViewingSake = signal(true);
 
-  readonly selectedPresetId = signal('standard');
+    readonly sevenPointCap = signal(false);
 
-  readonly customYakuValues = signal<Record<string, number>>({});
+    readonly oyaIndex = signal(0);
 
-  readonly presets = SCORE_PRESETS;
+    readonly selectedPresetId = signal('standard');
 
-  readonly yakus = YAKUS;
+    readonly customYakuValues = signal<Record<string, number>>({});
 
-  readonly validSetup = computed(() => {
-      return this.playerNames().every(
-          name => name.trim().length > 0
-      );
-  });
+    readonly presets = SCORE_PRESETS;
 
-  constructor(
-      private readonly gameStore: GameStore,
-      private readonly router: Router
-  ) {
-      this.selectPreset('standard');
-  }
+    readonly yakus = YAKUS;
 
-  startGame() {
-    const players = this.playerNames().map((name, index) => ({
-        id: crypto.randomUUID(),
-        name,
-        score: 0
-    }));
+    readonly validSetup = computed(() => {
+        return this.playerNames().every(
+            name => name.trim().length > 0
+        );
+    });
 
-    const ruleset = {
-        rounds: this.rounds(),
-        koiKoiBonus: this.koiKoiBonus(),
-        flowerViewingSake: this.flowerViewingSake(),
-        moonViewingSake: this.moonViewingSake(),
-        sevenPointCap: this.sevenPointCap(),
-        yakuValues: this.customYakuValues()
+    constructor() {
+        this.selectPreset('standard');
     }
 
-    this.gameStore.startGame(
-        players,
-        ruleset,
-        players[this.oyaIndex()].id,
-    );
+    startGame() {
+        const players = this.playerNames().map(name => ({
+            id: crypto.randomUUID(),
+            name,
+            score: 0
+        }));
 
-    console.log('Game started with game state:', this.gameStore);
+        const ruleset = {
+            rounds: this.rounds(),
+            koiKoiBonus: this.koiKoiBonus(),
+            flowerViewingSake: this.flowerViewingSake(),
+            moonViewingSake: this.moonViewingSake(),
+            sevenPointCap: this.sevenPointCap(),
+            yakuValues: this.customYakuValues()
+        }
 
-    this.router.navigate(['/game']);
-  }
+        this.gameStore.startGame(
+            players,
+            ruleset,
+            players[this.oyaIndex()].id,
+        );
 
-  updatePlayerName(playerName: string, index: number) {
-    this.playerNames.update(names => {
-        const newNames = [...names];
-        newNames[index] = playerName;
-        return newNames;
-    });
-  }
+        console.log('Game started with game state:', this.gameStore);
 
-  selectPreset(id: string) {
-      this.selectedPresetId.set(id);
+        void this.router.navigate(['/game']);
+    }
 
-      const preset = this.presets.find(
-          p => p.id === id
-      );
+    updatePlayerName(playerName: string, index: number) {
+        this.playerNames.update(names => {
+            const newNames = [...names];
+            newNames[index] = playerName;
+            return newNames;
+        });
+    }
 
-      if (!preset) {
-          return;
-      }
+    selectPreset(id: string) {
+        this.selectedPresetId.set(id);
 
-      this.customYakuValues.set({
-          ...preset.values
-      });
-  }
+        const preset = this.presets.find(
+            p => p.id === id
+        );
 
-  updateYakuValue(yakuId: string, value: number) {
-      this.customYakuValues.update(values => ({
-          ...values,
-          [yakuId]: value
-      }));
-  }
+        if (!preset) {
+            return;
+        }
+
+        this.customYakuValues.set({
+            ...preset.values
+        });
+    }
+
+    updateYakuValue(yakuId: string, value: number) {
+        this.customYakuValues.update(values => ({
+            ...values,
+            [yakuId]: value
+        }));
+    }
 }
