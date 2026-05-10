@@ -1,0 +1,40 @@
+<section class="setup-section">
+    <h2>Rules</h2>
+
+    <label>
+        <input
+            type="checkbox"
+            [checked]="koiKoiBonus()"
+            (change)="koiKoiBonusChange.emit($any($event.target).checked)"
+        />
+        Koi-Koi Bonus
+    </label>
+
+    <label>
+        <input
+            type="checkbox"
+            [checked]="flowerViewingSake()"
+            (change)="flowerViewingSakeChange.emit($any($event.target).checked)"
+        />
+        Flower Viewing Sake
+    </label>
+
+    <label>
+        <input
+            type="checkbox"
+            [checked]="moonViewingSake()"
+            (change)="moonViewingSakeChange.emit($any($event.target).checked)"
+        />
+        Moon Viewing Sake
+    </label>
+
+    <label>
+        <input
+            type="checkbox"
+            [checked]="sevenPointCap()"
+            (change)="sevenPointCapChange.emit($any($event.target).checked)"
+        />
+        Seven Point Cap
+    </label>
+</section>
+

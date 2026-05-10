@@ -6,9 +6,12 @@ import { GameStore } from '../../../core/store/game.store';
 import { SCORE_PRESETS } from '../../../data/score-presets';
 import { YAKUS } from '../../../data/yakus';
 
+import { RulesetOptions } from '../ruleset-options/ruleset-options';
+import { YakuValuesEditor } from '../yaku-values-editor/yaku-values-editor';
+
 @Component({
   selector: 'app-setup-page',
-  imports: [],
+  imports: [RulesetOptions, YakuValuesEditor],
   templateUrl: './setup-page.html',
   styleUrl: './setup-page.scss',
 })

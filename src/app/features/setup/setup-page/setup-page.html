@@ -34,45 +34,16 @@
     </label>
 </section>
 
-<section class="setup-section">
-    <h2>Rules</h2>
-
-    <label>
-        <input
-            type="checkbox"
-            [checked]="koiKoiBonus()"
-            (change)="koiKoiBonus.set($any($event.target).checked)"
-        />
-        Koi-Koi Bonus
-    </label>
-
-    <label>
-        <input
-            type="checkbox"
-            [checked]="flowerViewingSake()"
-            (change)="flowerViewingSake.set($any($event.target).checked)"
-        />
-        Flower Viewing Sake
-    </label>
-
-    <label>
-        <input
-            type="checkbox"
-            [checked]="moonViewingSake()"
-            (change)="moonViewingSake.set($any($event.target).checked)"
-        />
-        Moon Viewing Sake
-    </label>
-
-    <label>
-        <input
-            type="checkbox"
-            [checked]="sevenPointCap()"
-            (change)="sevenPointCap.set($any($event.target).checked)"
-        />
-        Seven Point Cap
-    </label>
-</section>
+<app-ruleset-options
+    [koiKoiBonus]="koiKoiBonus()"
+    (koiKoiBonusChange)="koiKoiBonus.set($event)"
+    [flowerViewingSake]="flowerViewingSake()"
+    (flowerViewingSakeChange)="flowerViewingSake.set($event)"
+    [moonViewingSake]="moonViewingSake()"
+    (moonViewingSakeChange)="moonViewingSake.set($event)"
+    [sevenPointCap]="sevenPointCap()"
+    (sevenPointCapChange)="sevenPointCap.set($event)"
+/>
 
 <section class="setup-section">
     <h2>Starting Oya</h2>
@@ -104,24 +75,11 @@
     </select>
 </section>
 
-<section class="setup-section">
-    <h2>Custom Yaku Values</h2>
-
-    @for (yaku of yakus; track yaku.id) {
-        <label>
-            {{ yaku.name }}
-
-            <input
-                type="number"
-                [value]="customYakuValues()[yaku.id]"
-                (input)="updateYakuValue(
-                    yaku.id,
-                    +$any($event.target).value
-                )"
-            />
-        </label>
-    }
-</section>
+<app-yaku-values-editor
+    [yakus]="yakus"
+    [values]="customYakuValues()"
+    (valuesChanged)="customYakuValues.set($event)"
+/>
 
 <button
     [disabled]="!validSetup()"

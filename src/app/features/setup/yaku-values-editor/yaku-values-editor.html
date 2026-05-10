@@ -1,0 +1,21 @@
+<section class="setup-section">
+    <h2>Custom Yaku Values</h2>
+
+    @for (yaku of yakus(); track yaku.id) {
+        <label>
+            {{ yaku.name }}
+
+            <input
+                type="number"
+                [value]="values()[yaku.id]"
+                (input)="updateValue(
+                    yaku.id,
+                    +$any($event.target).value
+                )"
+                min="1"
+                step="1"
+            />
+        </label>
+    }
+</section>
+

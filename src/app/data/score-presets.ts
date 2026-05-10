@@ -27,7 +27,7 @@ export const SCORE_PRESETS: ScorePreset[] = [
 
     // TODO: Change values
     values: {
-      'plants': 1,
+      'plants': 7,
       'monthly-card': 6,
       'ribbons': 1,
       'poetry-ribbons': 6,
