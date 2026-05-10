@@ -1,1 +1,39 @@
-<p>summary-page works!</p>
+<h1>Koi-Koi Counter - Summary</h1>
+
+<section class="summary-section">
+    <h2>Final Scores</h2>
+
+    <!-- Display the final scores in a table side by side for each player, vertically -->
+    <table>
+        <thead>
+            <tr>
+                @for (player of players(); track player.id) {
+                    <th>{{ player.name }}</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @for (round of roundHistory(); track round.roundNumber) {
+                <tr>
+                    @for (player of players(); track player.id) {
+                        @if (round.winnerId === player.id) {
+                            <td>{{ round.totalPoints }}</td>
+                        } @else {
+                            <td>0</td>
+                        }
+                    }
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td><strong>{{ players()[0].score }}</strong></td>
+                <td><strong>{{ players()[1].score }}</strong></td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <button
+        (click)="resetGame()"
+    > Return to Setup </button>
+</section>

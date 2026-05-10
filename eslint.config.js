@@ -4,6 +4,9 @@ const { defineConfig } = require("eslint/config");
 const tseslint = require("typescript-eslint");
 const angular = require("angular-eslint");
 
+const prettierPlugin = require("eslint-plugin-prettier");
+const prettierConfig = require("eslint-config-prettier");
+
 module.exports = defineConfig([
   {
     files: ["**/*.ts"],
@@ -12,8 +15,14 @@ module.exports = defineConfig([
       tseslint.configs.recommended,
       tseslint.configs.stylistic,
       angular.configs.tsRecommended,
+
+        // Disable conflicting formatting rules
+        prettierConfig
     ],
     processor: angular.processInlineTemplates,
+    plugins: {
+        prettier: prettierPlugin,
+    },
     rules: {
       "@angular-eslint/directive-selector": [
         "error",
@@ -31,6 +40,9 @@ module.exports = defineConfig([
           style: "kebab-case",
         },
       ],
+
+      // Run prettier as ESLint rule
+      "prettier/prettier": "error",
     },
   },
   {
@@ -38,7 +50,6 @@ module.exports = defineConfig([
     extends: [
       angular.configs.templateRecommended,
       angular.configs.templateAccessibility,
-    ],
-    rules: {},
+    ]
   },
 ]);

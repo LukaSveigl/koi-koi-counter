@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RoundPage } from "./round-page";
+import { RoundPage } from './round-page';
 
-describe("RoundPage", () => {
+describe('RoundPage', () => {
   let component: RoundPage;
   let fixture: ComponentFixture<RoundPage>;
 
@@ -16,7 +16,7 @@ describe("RoundPage", () => {
     await fixture.whenStable();
   });
 
-  it("should create", () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 });
