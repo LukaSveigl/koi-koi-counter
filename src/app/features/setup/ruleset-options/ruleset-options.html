@@ -1,4 +1,63 @@
 <section class="setup-section">
+
+    <h2>Rules</h2>
+
+    <div class="rules-list">
+
+        <mat-slide-toggle
+                [checked]="koiKoiBonus()"
+
+                (change)="
+        koiKoiBonusChange.emit(
+          $event.checked
+        )
+      "
+        >
+            Koi-Koi Bonus
+        </mat-slide-toggle>
+
+        <mat-slide-toggle
+                [checked]="flowerViewingSake()"
+
+                (change)="
+        flowerViewingSakeChange.emit(
+          $event.checked
+        )
+      "
+        >
+            Flower Viewing Sake
+        </mat-slide-toggle>
+
+        <mat-slide-toggle
+                [checked]="moonViewingSake()"
+
+                (change)="
+        moonViewingSakeChange.emit(
+          $event.checked
+        )
+      "
+        >
+            Moon Viewing Sake
+        </mat-slide-toggle>
+
+        <mat-slide-toggle
+                [checked]="sevenPointCap()"
+
+                (change)="
+        sevenPointCapChange.emit(
+          $event.checked
+        )
+      "
+        >
+            Seven Point Cap
+        </mat-slide-toggle>
+
+    </div>
+
+</section>
+
+
+<!--<section class="setup-section">
     <h2>Rules</h2>
 
     <label>
@@ -38,3 +97,4 @@
     </label>
 </section>
 
+-->

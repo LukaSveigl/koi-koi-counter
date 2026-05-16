@@ -1,18 +1,35 @@
 import { Component, inject, computed, signal } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { MatCardModule } from '@angular/material/card';
+import { MatInputModule } from '@angular/material/input';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+
+import { RulesetOptions } from '../ruleset-options/ruleset-options';
+import { YakuValuesEditor } from '../yaku-values-editor/yaku-values-editor';
+
 import { GameStore } from '../../../core/store/game.store';
 
 import { SCORE_PRESETS } from '../../../data/score-presets';
 import { YAKUS } from '../../../data/yakus';
 
-import { RulesetOptions } from '../ruleset-options/ruleset-options';
-import { YakuValuesEditor } from '../yaku-values-editor/yaku-values-editor';
 import { Ruleset } from '../../../core/models/ruleset.model';
 
 @Component({
   selector: 'app-setup-page',
-  imports: [RulesetOptions, YakuValuesEditor],
+  imports: [
+    MatCardModule,
+    MatInputModule,
+    MatRadioModule,
+    MatButtonModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    RulesetOptions,
+    YakuValuesEditor,
+  ],
   templateUrl: './setup-page.html',
   styleUrl: './setup-page.scss',
 })

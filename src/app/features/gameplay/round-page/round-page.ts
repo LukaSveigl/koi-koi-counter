@@ -47,7 +47,10 @@ export class RoundPage {
     if (this.players().length === 0) {
       return false;
     } else {
-      return this.koiKoiCount() >= 0 && this.players().filter((player) => player.id === this.winnerId()).length;
+      return (
+        this.koiKoiCount() >= 0 &&
+        this.players().filter((player) => player.id === this.winnerId()).length
+      );
     }
   });
 

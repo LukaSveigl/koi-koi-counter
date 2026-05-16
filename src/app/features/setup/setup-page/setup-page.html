@@ -1,4 +1,142 @@
-<h1>Koi-Koi Counter - Setup</h1>
+<div class="setup-page">
+    <mat-card class="setup-card">
+
+        <mat-card-header>
+            <mat-card-title>
+                Koi-Koi Counter
+            </mat-card-title>
+
+            <mat-card-subtitle>
+                Game Setup
+            </mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+            <section class="setup-section">
+
+                <h2>Players</h2>
+
+                @for (player of playerNames(); track $index) {
+                    <mat-form-field appearance="outline" class="full-width">
+
+                        <mat-label>
+                            Player {{ $index + 1 }}
+                        </mat-label>
+
+                        <input
+                            matInput
+                            [value]="player"
+                            (input)="updatePlayerName($any($event.target).value, $index)"
+                        >
+                    </mat-form-field>
+                }
+            </section>
+
+            <section class="setup-section">
+
+                <h2>Rounds</h2>
+
+                <mat-radio-group
+                    class="rounds-group"
+                    [value]="rounds()"
+                >
+                    <mat-radio-button
+                        [value]="6"
+                        (change)="rounds.set(6)"
+                    >
+                        6 Rounds
+                    </mat-radio-button>
+
+                    <mat-radio-button
+                            [value]="12"
+                            (change)="rounds.set(12)"
+                    >
+                        12 Rounds
+                    </mat-radio-button>
+                </mat-radio-group>
+
+            </section>
+
+            <app-ruleset-options
+                [koiKoiBonus]="koiKoiBonus()"
+                (koiKoiBonusChange)="koiKoiBonus.set($event)"
+                [flowerViewingSake]="flowerViewingSake()"
+                (flowerViewingSakeChange)="flowerViewingSake.set($event)"
+                [moonViewingSake]="moonViewingSake()"
+                (moonViewingSakeChange)="moonViewingSake.set($event)"
+                [sevenPointCap]="sevenPointCap()"
+                (sevenPointCapChange)="sevenPointCap.set($event)"
+            />
+
+            <section class="setup-section">
+
+                <h2>Starting Oya</h2>
+
+                <mat-form-field
+                    appearance="outline"
+                    class="full-width"
+                >
+                    <mat-label>
+                        Oya
+                    </mat-label>
+
+                    <mat-select
+                        [value]="oyaIndex()"
+                        (selectionChange)="oyaIndex.set($event.value)"
+                    >
+                        @for (player of playerNames(); track $index) {
+
+                            <mat-option [value]="$index">
+                                {{ player || 'Player ' + ($index + 1) }}
+                            </mat-option>
+                        }
+
+                    </mat-select>
+                </mat-form-field>
+
+            </section>
+
+            <section class="setup-section">
+                <h2>Score Preset</h2>
+
+                <mat-select
+                        [value]="selectedPresetId()"
+                        (change)="selectPreset($any($event.target).value)"
+                >
+                    @for (preset of presets; track preset.id) {
+                        <mat-option [value]="preset.id">
+                            {{ preset.name }}
+                        </mat-option>
+                    }
+                </mat-select>
+            </section>
+
+            <app-yaku-values-editor
+                [yakus]="yakus"
+                [values]="customYakuValues()"
+                (valuesChanged)="customYakuValues.set($event)"
+            />
+
+        </mat-card-content>
+
+        <mat-card-actions>
+
+            <button
+                mat-flat-button
+                color="primary"
+                class="start-button"
+                [disabled]="!validSetup()"
+                (click)="startGame()"
+            >
+                Start game
+            </button>
+
+        </mat-card-actions>
+
+    </mat-card>
+</div>
+
+<!--<h1>Koi-Koi Counter - Setup</h1>
 
 <section class="setup-section">
     <h2>Players</h2>
@@ -84,4 +222,4 @@
 <button
     [disabled]="!validSetup()"
     (click)="startGame()"
-> Start Game </button>
+> Start Game </button>-->
