@@ -7,7 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "deploy": "ng build --base-href=/koi-koi-counter/ && npx angular-cli-ghpages --dir=dist/browser"
   },
   "dependencies": {
     "@angular/cdk": "^21.2.10",
@@ -29,6 +30,7 @@
     "@angular/cli": "^21.2.10",
     "@angular/compiler-cli": "^21.2.0",
     "@eslint/js": "^10.0.1",
+    "angular-cli-ghpages": "^3.0.3",
     "angular-eslint": "21.3.1",
     "eslint": "^10.0.3",
     "eslint-config-prettier": "^10.1.8",
