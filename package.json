@@ -8,7 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
-    "deploy": "ng build --base-href=/koi-koi-counter/ && npx angular-cli-ghpages --dir=dist/browser"
+    "deploy": "ng build --base-href=/koi-koi-counter/ && npx angular-cli-ghpages --dir=dist/koi-koi-counter/browser"
   },
   "dependencies": {
     "@angular/cdk": "^21.2.10",
