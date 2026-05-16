@@ -44,7 +44,11 @@ export class RoundPage {
   });
 
   readonly validRound = computed(() => {
-    return this.koiKoiCount() >= 0;
+    if (this.players().length === 0) {
+      return false;
+    } else {
+      return this.koiKoiCount() >= 0 && this.players().filter((player) => player.id === this.winnerId()).length;
+    }
   });
 
   constructor() {
