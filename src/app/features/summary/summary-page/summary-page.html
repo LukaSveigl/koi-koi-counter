@@ -1,39 +1,94 @@
-<h1>Koi-Koi Counter - Summary</h1>
+<div class="summary-page">
+    <mat-card class="header-card">
+        <div class="vertical-padding">
+            <mat-card-title>
+                Game Summary
+            </mat-card-title>
 
-<section class="summary-section">
-    <h2>Final Scores</h2>
+            <mat-card-subtitle>
+                Final Results
+            </mat-card-subtitle>
+        </div>
+    </mat-card>
 
-    <!-- Display the final scores in a table side by side for each player, vertically -->
-    <table>
-        <thead>
-            <tr>
-                @for (player of players(); track player.id) {
-                    <th>{{ player.name }}</th>
+    <mat-card class="winner-card">
+        <mat-card-title class="winner-label">
+            Winner
+        </mat-card-title>
+
+        <mat-card-content>
+            <h1 class="winner-name">
+                {{ winner().name }}
+            </h1>
+
+            <p class="winner-score">
+                {{ winner().score }} points
+            </p>
+        </mat-card-content>
+    </mat-card>
+
+    <section class="scores-section">
+        @for (player of players(); track player.id) {
+            <mat-card class="score-card">
+                <mat-card-content>
+                    <div class="score-card-content">
+                        <div>
+                            <h3 class="player-name">
+                                {{ player.name }}
+                            </h3>
+                            <p class="score-label">
+                                Total Score
+                            </p>
+                        </div>
+
+                        <div class="score-value">
+                            {{ player.score }}
+                        </div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        }
+    </section>
+
+    <!-- Round History -->
+
+    <mat-card class="history-card">
+        <mat-card-header>
+            <mat-card-title>
+                Round History
+            </mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content>
+            <div class="history-list">
+                @for (round of roundHistory(); track round.roundNumber) {
+                    <div class="history-item">
+                        <div class="history-round">
+                            Round
+                            {{ round.roundNumber }}
+                        </div>
+
+                        <div class="history-result">
+                            {{
+                                getWinnerName(round.winnerId)
+                            }}
+                            +{{ round.totalPoints }}
+
+                        </div>
+                    </div>
+
+                    <mat-divider/>
                 }
-            </tr>
-        </thead>
-        <tbody>
-            @for (round of roundHistory(); track round.roundNumber) {
-                <tr>
-                    @for (player of players(); track player.id) {
-                        @if (round.winnerId === player.id) {
-                            <td>{{ round.totalPoints }}</td>
-                        } @else {
-                            <td>0</td>
-                        }
-                    }
-                </tr>
-            }
-        </tbody>
-        <tfoot>
-            <tr>
-                <td><strong>{{ players()[0].score }}</strong></td>
-                <td><strong>{{ players()[1].score }}</strong></td>
-            </tr>
-        </tfoot>
-    </table>
+            </div>
+        </mat-card-content>
+    </mat-card>
 
     <button
+        mat-flat-button
+        color="primary"
+        class="reset-button"
         (click)="resetGame()"
-    > Return to Setup </button>
-</section>
+    >
+        Return to Setup
+    </button>
+</div>

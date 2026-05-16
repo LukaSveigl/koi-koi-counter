@@ -4,6 +4,16 @@ import { Router } from '@angular/router';
 import { GameStore } from '../../../core/store/game.store';
 import { calculateRoundScore } from '../../../core/scoring/score-engine';
 
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatDividerModule } from '@angular/material/divider';
+
+import { YakuSelector } from '../yaku-selector/yaku-selector';
+
 import { YAKUS } from '../../../data/yakus';
 import { GamePhase } from '../../../core/models/game-phase.enum';
 import { Yaku } from '../../../core/models/yaku.model';
@@ -11,6 +21,16 @@ import { Yaku } from '../../../core/models/yaku.model';
 @Component({
   selector: 'app-round-page',
   standalone: true,
+  imports: [
+    MatCardModule,
+    MatButtonModule,
+    MatRadioModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatChipsModule,
+    MatDividerModule,
+    YakuSelector,
+  ],
   templateUrl: './round-page.html',
   styleUrl: './round-page.scss',
 })

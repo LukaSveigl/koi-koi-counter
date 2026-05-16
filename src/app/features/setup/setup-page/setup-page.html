@@ -1,6 +1,5 @@
 <div class="setup-page">
     <mat-card class="setup-card">
-
         <mat-card-header>
             <mat-card-title>
                 Koi-Koi Counter
@@ -13,7 +12,6 @@
 
         <mat-card-content>
             <section class="setup-section">
-
                 <h2>Players</h2>
 
                 @for (player of playerNames(); track $index) {
@@ -33,7 +31,6 @@
             </section>
 
             <section class="setup-section">
-
                 <h2>Rounds</h2>
 
                 <mat-radio-group
@@ -54,7 +51,6 @@
                         12 Rounds
                     </mat-radio-button>
                 </mat-radio-group>
-
             </section>
 
             <app-ruleset-options
@@ -69,7 +65,6 @@
             />
 
             <section class="setup-section">
-
                 <h2>Starting Oya</h2>
 
                 <mat-form-field
@@ -90,7 +85,6 @@
                                 {{ player || 'Player ' + ($index + 1) }}
                             </mat-option>
                         }
-
                     </mat-select>
                 </mat-form-field>
 
@@ -120,7 +114,6 @@
         </mat-card-content>
 
         <mat-card-actions>
-
             <button
                 mat-flat-button
                 color="primary"
@@ -130,96 +123,6 @@
             >
                 Start game
             </button>
-
         </mat-card-actions>
-
     </mat-card>
 </div>
-
-<!--<h1>Koi-Koi Counter - Setup</h1>
-
-<section class="setup-section">
-    <h2>Players</h2>
-
-    @for (player of playerNames(); track $index) {
-        <input
-            [value]="player"
-            (input)="updatePlayerName($any($event.target).value, $index)"
-            placeholder="Player {{ $index + 1 }}"
-        />
-    }
-</section>
-
-<section class="setup-section">
-    <h2>Rounds</h2>
-
-    <label>
-        <input
-            type="radio"
-            [checked]="rounds() === 6"
-            (change)="rounds.set(6)"
-        />
-        6 Rounds
-    </label>
-
-    <label>
-        <input
-            type="radio"
-            [checked]="rounds() === 12"
-            (change)="rounds.set(12)"
-        />
-        12 Rounds
-    </label>
-</section>
-
-<app-ruleset-options
-    [koiKoiBonus]="koiKoiBonus()"
-    (koiKoiBonusChange)="koiKoiBonus.set($event)"
-    [flowerViewingSake]="flowerViewingSake()"
-    (flowerViewingSakeChange)="flowerViewingSake.set($event)"
-    [moonViewingSake]="moonViewingSake()"
-    (moonViewingSakeChange)="moonViewingSake.set($event)"
-    [sevenPointCap]="sevenPointCap()"
-    (sevenPointCapChange)="sevenPointCap.set($event)"
-/>
-
-<section class="setup-section">
-    <h2>Starting Oya</h2>
-
-    <select
-        [value]="oyaIndex()"
-        (change)="oyaIndex.set($any($event.target).value)"
-    >
-        @for (player of playerNames(); track $index) {
-            <option [value]="$index">
-                {{ player || 'Player ' + ($index + 1) }}
-            </option>
-        }
-    </select>
-</section>
-
-<section class="setup-section">
-    <h2>Score Preset</h2>
-
-    <select
-        [value]="selectedPresetId()"
-        (change)="selectPreset($any($event.target).value)"
-    >
-        @for (preset of presets; track preset.id) {
-            <option [value]="preset.id">
-                {{ preset.name }}
-            </option>
-        }
-    </select>
-</section>
-
-<app-yaku-values-editor
-    [yakus]="yakus"
-    [values]="customYakuValues()"
-    (valuesChanged)="customYakuValues.set($event)"
-/>
-
-<button
-    [disabled]="!validSetup()"
-    (click)="startGame()"
-> Start Game </button>-->

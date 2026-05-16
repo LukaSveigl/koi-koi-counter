@@ -1,93 +1,130 @@
-<h1>Koi-Koi Counter - Round</h1>
+<div class="round-page">
+    <mat-card class="header-card">
+        <div class="vertical-padding">
+            <mat-card-title>
+                Round {{ currentRound() }}
+            </mat-card-title>
 
-<h2>Round {{ currentRound() }}</h2>
+            <mat-card-subtitle>
+                Koi-Koi Counter
+            </mat-card-subtitle>
+        </div>
+    </mat-card>
 
-<section class="round-section">
-    <h2>Winner Select</h2>
+    <section class="scores-section">
+        @for (player of players(); track player.id) {
+            <mat-card
+                class="score-card"
+                [class.winner-selected]="winnerId() === player.id"
+            >
+                <mat-card-content>
+                    <div class="score-card-content">
+                        <div>
+                            <h3>{{ player.name }}</h3>
+                            <p>Score</p>
+                        </div>
 
-    <label>
-        <input
-            type="radio"
-            [checked]="winnerId() === players()[0].id"
-            (change)="winnerId.set(players()[0].id)"
-        />
-        {{ players()[0].name }}
-    </label>
-
-    <label>
-        <input
-            type="radio"
-            [checked]="winnerId() === players()[1].id"
-            (change)="winnerId.set(players()[1].id)"
-        />
-        {{ players()[1].name }}
-    </label>
-</section>
-
-<section class="round-section">
-    <h2>Yakus</h2>
-
-    @for (yaku of yakus; track yaku.id) {
-        <label>
-            <input
-                type="button"
-                (click)="selectYaku(yaku.id)"
-                value="{{ yaku.name }}"
-            />
-        </label>
-    }
-
-    <div class="selected-yakus">
-        @for (yaku of selectedYakus(); track yaku.id) {
-            <input
-                type="button"
-                (click)="deselectYaku(yaku.id)"
-                value="{{ yaku.name }}"
-            />
+                        <div class="score-value">
+                            {{ player.score }}
+                        </div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
         }
-    </div>
-</section>
+    </section>
 
-<section class="round-section">
-    <h2>Koi-Koi value</h2>
+    <mat-card class="round-card">
+        <mat-card-header class="round-card">
+            <mat-card-title>
+                Winner
+            </mat-card-title>
+        </mat-card-header>
 
-    <input
-        type="number"
-        [value]="koiKoiCount()"
-        (input)="koiKoiCount.set(Math.abs($any($event.target).valueAsNumber))"
-        min="0"
-        step="1"
+        <mat-card-content>
+            <mat-radio-group
+                class="winner-group"
+                [value]="winnerId()"
+            >
+                @for (player of players(); track player.id) {
+                    <mat-radio-button
+                        [value]="player.id"
+                        (change)="winnerId.set(player.id)"
+                    >
+                        {{ player.name }}
+                    </mat-radio-button>
+                }
+            </mat-radio-group>
+        </mat-card-content>
+    </mat-card>
+
+    <app-yaku-selector
+        [yakus]="yakus"
+        [selectedYakus]="selectedYakus()"
+        (yakuSelected)="selectYaku($event)"
+        (yakuDeselected)="selectYaku($event)"
     />
-</section>
 
-<section class="round-section">
-    <h2>Round Value</h2>
+    <mat-card class="round-card">
+        <mat-card-header class="round-card">
+            <mat-card-title>
+                Koi-Koi Bonus
+            </mat-card-title>
+        </mat-card-header>
 
-    {{ roundValue() }}
-</section>
+        <mat-card-content>
+            <mat-form-field
+                appearance="outline"
+                class="full-width"
+            >
+                <mat-label>
+                    Koi-Koi Count
+                </mat-label>
 
-<section class="round-section">
-    <h2>Round Actions</h2>
+                <input
+                    matInput
+                    type="number"
+                    [value]="koiKoiCount()"
+                    (input)="koiKoiCount.set(Math.abs($any($event.target).valueAsNumber))"
+                    min="0"
+                    step="1"
+                />
+            </mat-form-field>
+        </mat-card-content>
+    </mat-card>
 
-    <button
-        (click)="applyRound()"
-        [disabled]="!validRound()"
-    >Submit round</button>
+    <mat-card class="value-card">
+        <mat-card-content>
+            <div class="value-content">
+                <div>
+                    <p class="value-label">
+                        Round Value
+                    </p>
 
-    <button
-        (click)="resetRound()"
+                    <h1>
+                        {{ roundValue() }}
+                    </h1>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
 
-    >Reset round</button>
-</section>
+    <div class="actions">
+        <button
+            mat-flat-button
+            color="primary"
+            class="action-button"
+            [disabled]="!validRound()"
+            (click)="applyRound()"
+        >
+            Submit Round
+        </button>
 
-<section class="round-section">
-    <h2>Player Scores</h2>
-
-    <p>
-        {{ players()[0].name }}: {{ players()[0].score }}
-    </p>
-
-    <p>
-        {{ players()[1].name }}: {{ players()[1].score }}
-    </p>
-</section>
+        <button
+            mat-stroked-button
+            class="action-button"
+            (click)="resetRound()"
+        >
+            Reset
+        </button>
+    </div>
+</div>

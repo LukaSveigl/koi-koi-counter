@@ -1,0 +1,49 @@
+<mat-card class="round-card">
+    <mat-card-header class="round-card">
+        <mat-card-title>
+            Yakus
+        </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+        <div class="yaku-selection-grid">
+            @for (yaku of yakus(); track yaku.id) {
+                <button
+                    mat-stroked-button
+                    class="yaku-select-button"
+                    (click)="yakuSelected.emit(yaku.id)"
+                >
+                    {{ yaku.name }}
+                </button>
+            }
+        </div>
+
+        <mat-divider />
+
+        <div class="selected-yaku-section">
+            <h3>
+                Selected Yakus
+            </h3>
+
+            @if (selectedYakus().length === 0) {
+                <p class="empty-text">
+                    No yakus selected
+                </p>
+            }
+
+            <div class="selected-yaku-list">
+                @for (yaku of selectedYakus(); track $index) {
+                    <button
+                        mat-flat-button
+                        color="primary"
+                        class="selected-yaku-button"
+                        (click)="yakuDeselected.emit(yaku.id)"
+                    >
+                        {{ yaku.name }}
+                        ✕
+                    </button>
+                }
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>

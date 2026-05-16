@@ -1,0 +1,118 @@
+.round-page {
+  padding: 1rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.header-card {
+  text-align: center;
+}
+
+.scores-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.score-card {
+  transition:
+          transform 0.2s ease,
+          border-color 0.2s ease;
+
+  border: 2px solid transparent;
+}
+
+.winner-selected {
+  border-color: var(--mat-sys-primary);
+
+  transform: scale(1.02);
+}
+
+.score-card-content {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+}
+
+.score-value {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.round-card {
+  padding-bottom: 1rem;
+}
+
+.winner-group {
+  display: flex;
+  flex-direction: column;
+
+  gap: 1rem;
+}
+
+.yaku-chip-list {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 0.75rem;
+}
+
+.yaku-button {
+  min-height: 44px;
+}
+
+.selected-yaku {
+  background-color:
+          var(--mat-sys-primary);
+
+  color: white;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.value-card {
+  text-align: center;
+}
+
+.value-content {
+  padding: 1rem;
+}
+
+.value-label {
+  margin-bottom: 0.5rem;
+
+  opacity: 0.7;
+}
+
+.actions {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 1rem;
+
+  margin-bottom: 2rem;
+}
+
+.action-button {
+  height: 52px;
+
+  font-size: 1rem;
+
+  font-weight: 600;
+}
+
+.vertical-padding {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
